@@ -19,15 +19,15 @@ public class AdgroupService {
      * 광고그룹 등록
      *
      * */
-    public void addAdgroup(AdgroupRequestDto requestDto){
-        adgroupRepository.save(new Adgroup().addAdgroup(requestDto));
+    public Long addAdgroup(AdgroupRequestDto requestDto){
+        return adgroupRepository.save(new Adgroup().addAdgroup(requestDto)).getAdgroupId();
     }
     
     /*
     *  광고그룹 목록 조회
     * 
     * */
-    public List<AdgroupResponseDto> getAGroupList(){
+    public List<AdgroupResponseDto> getAdGroupList(){
         return  adgroupRepository.findAll().stream().map(AdgroupResponseDto::new).collect(Collectors.toList());
     }
 }

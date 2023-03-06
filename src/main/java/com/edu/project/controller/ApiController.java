@@ -43,8 +43,9 @@ public class ApiController {
      * */
     @PostMapping("/api/adgroup")
     @ResponseBody
-    public void postAdgroup(@RequestBody AdgroupRequestDto requestDto){
-        adgroupService.addAdgroup(requestDto);
+    public Long postAdgroup(@RequestBody AdgroupRequestDto requestDto){
+
+        return  adgroupService.addAdgroup(requestDto);
     }
 
     /*
@@ -54,7 +55,7 @@ public class ApiController {
     @GetMapping("/api/adgroup")
     @ResponseBody
     public List<AdgroupResponseDto> getAdgroupList() {
-        List<AdgroupResponseDto> agroupList = adgroupService.getAGroupList();
+        List<AdgroupResponseDto> agroupList = adgroupService.getAdGroupList();
 
         return agroupList;
     }

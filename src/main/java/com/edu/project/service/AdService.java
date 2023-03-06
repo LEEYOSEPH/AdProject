@@ -25,30 +25,44 @@ public class AdService {
     private final AdRepository adRepository;
     private final KwdRepository kwdRepository;
     private final DadDetRepository dadDetRepository;
-
     private final DadDetBidRepository dadDetBidRepository;
 
     /*
     *  광고 등록
     * */
     public void postAd(AdRequestDto requestDto) {
-        AD save = adRepository.save( new AD().addAd(requestDto));
-        Long adId = save.getAdId();
+        Long adId = adRepository.save(new AD().addAd(requestDto)).getAdId();
+        // 키워드 등록
+        addKwd(adId,requestDto);
+    }
+
+    /*
+    *  키워드 등록
+    * */
+    public void addKwd(Long adId, AdRequestDto requestDto) {
 
         List<KwdRequestDto> list = requestDto.getKWds().stream().map(KwdRequestDto::new).collect(Collectors.toList());
+
         if(list.size() > 0) {
+
             list.forEach(kwdRequestDto ->  {
+
                 // 키워드명 테이블에 존재 하는지 조회
                 Optional<Kwd> optionalKwd = kwdRepository.findByKwdName(kwdRequestDto.getKwdName());
+                int bidCost = kwdRequestDto.getBidCost();
+
                 if(optionalKwd.isEmpty()) {
+
                     // 키워드명 존재하지 않으면 신규 등록
-                    Kwd kwd = kwdRepository.save(new Kwd().addKwd(kwdRequestDto));
-                    Long kwdId = kwd.getKwdId();
+                    Long kwdId = kwdRepository.save(new Kwd().addKwd(kwdRequestDto)).getKwdId();
+
                     // 직접광고 상세등록 키워드 포함
-                    addDadDetKwd(adId,kwdId, kwdRequestDto.getBidCost());
+                    addDadDetKwd(adId,kwdId,bidCost);
+
                 }else {
+
                     // 키워드명 존재하면 기존 키워드를 등록
-                    addDadDetKwd(adId,optionalKwd.get().getKwdId(), kwdRequestDto.getBidCost());
+                    addDadDetKwd(adId,optionalKwd.get().getKwdId(), bidCost);
                 }
             });
         }else {
@@ -75,8 +89,7 @@ public class AdService {
     *  직접 광고 상세 등록 키워드 포함
     * */
     public void addDadDetKwd(Long adId, Long kwdID,int bidCost){
-        DadDet dadDet = dadDetRepository.save(new DadDet().addDadDetKwd(adId, kwdID));
-        Long dadDetId = dadDet.getDadDetId();
+        Long dadDetId = dadDetRepository.save(new DadDet().addDadDetKwd(adId, kwdID)).getDadDetId();
         addDadDetBid(dadDetId,bidCost);
     }
     
