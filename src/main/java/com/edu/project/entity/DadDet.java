@@ -14,8 +14,8 @@ public class DadDet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dadDetId;
     private String dadCnrStatus; // 기본: APPROVAL
-    private String dadUseConfigYn;
-    private String dadActYn;
+    private Integer dadUseConfigYn;
+    private Integer dadActYn;
     private Date regTime;
 
     /*직접광고 상세와 키워드는 N:1관계*/
@@ -35,8 +35,8 @@ public class DadDet {
         this.adId = adId;
         this.kwdId = kwdId;
         this.dadCnrStatus = "APPROVAL";
-        this.dadUseConfigYn = "N";
-        this.dadActYn = "N";
+        this.dadUseConfigYn = 1;
+        this.dadActYn = 1;
         this.regTime = new Date();
 
     }

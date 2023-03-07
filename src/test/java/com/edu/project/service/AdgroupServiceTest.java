@@ -30,11 +30,11 @@ class AdgroupServiceTest {
         String adGroupName = "광고 테스트";
         AdgroupRequestDto adgroupRequestDto = AdgroupRequestDto.builder().adgroupName(adGroupName).build();
         //when
-        Long adgroupId = adgroupService.addAdgroup(adgroupRequestDto);
+        AdgroupResponseDto adgroupResponseDto = adgroupService.addAdgroup(adgroupRequestDto);
         //then
-        Optional<Adgroup> adgroup = adgroupRepository.findById(adgroupId);
+        Optional<Adgroup> adgroup = adgroupRepository.findById(adgroupResponseDto.getAdgroupId());
         assertThat(adGroupName).isEqualTo(adgroup.get().getAdgroupName());
-        adgroupRepository.deleteById(adgroupId);
+        adgroupRepository.deleteById(adgroupResponseDto.getAdgroupId());
     }
     
     @Test

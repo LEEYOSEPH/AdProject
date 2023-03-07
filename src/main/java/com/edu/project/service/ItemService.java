@@ -1,26 +1,27 @@
 package com.edu.project.service;
 
-import com.edu.project.response.ItemResponseDto;
-import com.edu.project.repository.ItemRepository;
+import com.edu.project.repository.ItemRepositoryImpl;
+import com.edu.project.request.ItemRequestDto;
+import com.edu.project.response.SearchItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ItemService {
-    private final ItemRepository itemRepository;
-    
-    /*
-    * 상품명 조회
-    *
-    * */
-    public List<ItemResponseDto> getItemList(String itemName) {
-        return  itemRepository.findByItemNameContaining(itemName).stream().map(ItemResponseDto::new).collect(Collectors.toList());
-    }
 
+    private final ItemRepositoryImpl itemRepositoryImpl;
+
+
+    /*
+     * 상품명 조회 - QueryDsl
+     *
+     * */
+    public List<SearchItemResponseDto> searchItemLists(ItemRequestDto requestDto) {
+        return itemRepositoryImpl.searchItemLists(requestDto);
+    }
 
 
 }

@@ -10,11 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AdgroupResponseDto {
 
-    private Long adgroupId;
     private String adgroupName;
 
     public AdgroupResponseDto(Adgroup adgroup) {
-        this.adgroupId = adgroup.getAdgroupId();
         this.adgroupName = adgroup.getAdgroupName();
     }
 }

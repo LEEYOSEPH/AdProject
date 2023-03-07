@@ -14,9 +14,9 @@ import java.util.Date;
 public class AD {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adId;
-    private String adUseConfigYn;
+    private Integer adUseConfigYn;
     private Date regTime;
-    private String adActYn;
+    private Integer adActYn;
     
     /*광고와 상품은 N:1 관계*/
     @ManyToOne
@@ -32,9 +32,9 @@ public class AD {
 
     @Builder
     public AD (Long itemId, Long adgroupId) {
-        this.adUseConfigYn = "Y";
+        this.adUseConfigYn = 1;
         this.regTime = new Date();
-        this.adActYn = "Y";
+        this.adActYn = 1;
         this.itemId = itemId;
         this.adgroupId = adgroupId;
     }

@@ -18,14 +18,14 @@ public class Kwd {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long kwdId;
     private String kwdName;
-    private String sellPossKwdYn;
-    private String manualCnrKwdYn;
+    private Integer sellPossKwdYn;
+    private Integer manualCnrKwdYn;
 
     @Builder
     public Kwd(String kwdName) {
         this.kwdName = kwdName;
-        this.sellPossKwdYn = "Y";
-        this.manualCnrKwdYn = "N";
+        this.sellPossKwdYn = 1;
+        this.manualCnrKwdYn = 0;
     }
 
     public Kwd addKwd(KwdRequestDto kwdRequestDto) {

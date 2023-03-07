@@ -19,8 +19,10 @@ public class AdgroupService {
      * 광고그룹 등록
      *
      * */
-    public Long addAdgroup(AdgroupRequestDto requestDto){
-        return adgroupRepository.save(new Adgroup().addAdgroup(requestDto)).getAdgroupId();
+    public AdgroupResponseDto addAdgroup(AdgroupRequestDto requestDto){
+        Adgroup save = adgroupRepository.save(new Adgroup().addAdgroup(requestDto));
+        AdgroupResponseDto responseDto = new AdgroupResponseDto(save);
+        return responseDto;
     }
     
     /*

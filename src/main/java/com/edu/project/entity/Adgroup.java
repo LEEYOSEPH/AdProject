@@ -20,13 +20,13 @@ public class Adgroup {
     private Long adgroupId;
     private String adgroupName;
     private Date regTime;
-    private String adgroupActYn;
+    private Integer adgroupActYn;
 
     @Builder
     public Adgroup(String adgroupName){
         this.adgroupName = adgroupName;
         this.regTime = new Date();
-        this.adgroupActYn = "Y";
+        this.adgroupActYn = 1;
 
     }
 

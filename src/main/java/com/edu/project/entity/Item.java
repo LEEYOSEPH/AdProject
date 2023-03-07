@@ -12,10 +12,10 @@ public class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
-    private Long itemNo;
+    private String itemNo;
     private String itemName;
-    private String AdultYn;
+    private Integer adultYn;
     private String itemOrgCost;
-    private String itemActYn;
+    private Integer itemActYn;
 
 }
