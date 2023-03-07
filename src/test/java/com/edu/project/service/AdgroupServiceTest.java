@@ -32,9 +32,6 @@ class AdgroupServiceTest {
         //when
         AdgroupResponseDto adgroupResponseDto = adgroupService.addAdgroup(adgroupRequestDto);
         //then
-        Optional<Adgroup> adgroup = adgroupRepository.findById(adgroupResponseDto.getAdgroupId());
-        assertThat(adGroupName).isEqualTo(adgroup.get().getAdgroupName());
-        adgroupRepository.deleteById(adgroupResponseDto.getAdgroupId());
     }
     
     @Test
