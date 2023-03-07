@@ -4,8 +4,6 @@ import com.edu.project.entity.Adgroup;
 import com.edu.project.repository.AdgroupRepository;
 import com.edu.project.request.AdgroupRequestDto;
 import com.edu.project.response.AdgroupResponseDto;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class AdgroupServiceTest {
@@ -43,11 +40,11 @@ class AdgroupServiceTest {
     @Test
     @DisplayName("광고그룹 조회")
     void test2() {
-        //given
-
-        //when
+        //given & when
         List<AdgroupResponseDto> adGroupList = adgroupService.getAdGroupList();
         //then
         assertThat(adGroupList).isNotEmpty();
     }
+    
+
 }
