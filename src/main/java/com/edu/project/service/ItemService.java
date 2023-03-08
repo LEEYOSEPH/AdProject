@@ -14,7 +14,6 @@ public class ItemService {
 
     private final ItemRepositoryImpl itemRepositoryImpl;
 
-
     /*
      * 상품명 조회 - QueryDsl
      *

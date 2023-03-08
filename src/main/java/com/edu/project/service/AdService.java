@@ -34,7 +34,7 @@ public class AdService {
     *  광고 등록
     * */
     public void postAd(AdRequestDto requestDto) {
-        // 광고그룹 이름으로 광고그룹ID 값 조회
+        // 광고그룹 이름으로 광고 그룹ID 값 조회
         Adgroup adgroup = adgroupRepository.findByAdgroupName(requestDto.getAdgroupName());
         requestDto.setAdgroupId(adgroup.getAdgroupId());
 
