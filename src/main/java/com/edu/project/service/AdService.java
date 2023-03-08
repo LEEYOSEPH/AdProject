@@ -1,13 +1,7 @@
 package com.edu.project.service;
 
-import com.edu.project.entity.AD;
-import com.edu.project.entity.DadDet;
-import com.edu.project.entity.DadDetBid;
-import com.edu.project.entity.Kwd;
-import com.edu.project.repository.AdRepository;
-import com.edu.project.repository.DadDetBidRepository;
-import com.edu.project.repository.DadDetRepository;
-import com.edu.project.repository.KwdRepository;
+import com.edu.project.entity.*;
+import com.edu.project.repository.*;
 import com.edu.project.request.AdRequestDto;
 import com.edu.project.request.KwdRequestDto;
 import com.edu.project.response.ItemIdResponseDto;
@@ -23,6 +17,7 @@ import java.util.stream.Collectors;
 public class AdService {
 
     private final AdRepository adRepository;
+    private final AdgroupRepository adgroupRepository;
     private final KwdRepository kwdRepository;
     private final DadDetRepository dadDetRepository;
     private final DadDetBidRepository dadDetBidRepository;
@@ -39,6 +34,11 @@ public class AdService {
     *  광고 등록
     * */
     public void postAd(AdRequestDto requestDto) {
+        // 광고그룹 이름으로 광고그룹ID 값 조회
+        Adgroup adgroup = adgroupRepository.findByAdgroupName(requestDto.getAdgroupName());
+        requestDto.setAdgroupId(adgroup.getAdgroupId());
+
+        // 광고 등록
         Long adId = adRepository.save(new AD().addAd(requestDto)).getAdId();
         // 키워드 등록
         addKwd(adId,requestDto);

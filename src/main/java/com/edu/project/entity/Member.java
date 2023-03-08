@@ -1,6 +1,7 @@
 package com.edu.project.entity;
 
 import com.edu.project.enums.Authority;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,11 @@ public class Member {
     private String pwd;
     @Enumerated(EnumType.STRING)
     private Authority roleGroup;
+
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "member")
+    @JsonManagedReference
+    private Adv adv;
 
 
     @Builder

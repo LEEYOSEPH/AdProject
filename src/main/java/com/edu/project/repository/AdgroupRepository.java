@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AdgroupRepository extends JpaRepository<Adgroup,Long> {
-
+    Adgroup findByAdgroupName(String adGroupName);
 }

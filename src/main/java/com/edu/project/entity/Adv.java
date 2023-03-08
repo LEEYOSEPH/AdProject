@@ -10,11 +10,14 @@ import java.io.Serializable;
 public class Adv implements Serializable {
 
     @Id
-    @OneToOne
+    private String advId;
+
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "adv_id",referencedColumnName = "member_id")
     private Member member;
-    private Integer adIngActYn;
-    private Integer balance;
-    private Integer eventMoneyBalance;
-    private Integer dayLimitBudget;
+    private Integer adIngActYn; // 광고진행 활성여부
+    private Integer balance; // 잔액
+    private Integer eventMoneyBalance; // 이벤트 머니 잔액
+    private Integer dayLimitBudget; // 일제한 예산
 }

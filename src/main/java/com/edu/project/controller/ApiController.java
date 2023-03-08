@@ -20,7 +20,6 @@ import java.util.List;
 public class ApiController {
 
     private final ItemService itemService;
-    private final ItemRepositoryImpl itemRepository;
     private final AdgroupService adgroupService;
     private final AdService adService;
 
@@ -68,7 +67,7 @@ public class ApiController {
     }
 
     /*
-    *  등록된 광고 확인 API
+    *  등록된 광고 및 활성 여부 확인 API
     * */
     @GetMapping("/api/getItemId")
     @ResponseBody

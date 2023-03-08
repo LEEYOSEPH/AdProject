@@ -13,7 +13,7 @@ class AdRepositoryTest {
     AdRepository adRepository;
 
     void test() {
-        adRepository.save(new AD(1L, 1L));
+        adRepository.save(new AD(1L, 1L,"adv"));
 
 
     }
