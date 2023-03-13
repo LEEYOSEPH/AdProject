@@ -21,12 +21,14 @@ public class Adgroup {
     private String adgroupName;
     private Date regTime;
     private Integer adgroupActYn;
+    private Integer adgroupUseConfigYn;
 
     @Builder
     public Adgroup(String adgroupName){
         this.adgroupName = adgroupName;
         this.regTime = new Date();
         this.adgroupActYn = 1;
+        this.adgroupUseConfigYn = 1;
 
     }
 

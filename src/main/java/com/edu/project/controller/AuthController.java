@@ -25,7 +25,7 @@ public class AuthController {
     /*
     *  로그인 후 jwt 토큰 발급 API
     * */
-    @PostMapping("/api/common/login")
+    @PostMapping("/api/login")
     public ResponseEntity<TokenDto> login(@RequestBody MemberLoginRequestDto loginRequestDto) {
 
         return ResponseEntity.ok(authService.login(loginRequestDto));
@@ -34,7 +34,7 @@ public class AuthController {
     /*
     *  refresh token 발급 API
     * */
-    @PostMapping("/api/common/refreshToken")
+    @PostMapping("/api/refreshToken")
     public ResponseEntity<TokenDto> reIssue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reIssue(tokenRequestDto));
     }

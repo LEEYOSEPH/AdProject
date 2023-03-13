@@ -18,4 +18,5 @@ public class Item {
     private String itemOrgCost;
     private Integer itemActYn;
 
+
 }
