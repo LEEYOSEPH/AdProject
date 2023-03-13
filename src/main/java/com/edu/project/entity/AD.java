@@ -25,7 +25,7 @@ public class AD {
     private Long itemId;
 
     /*광고와 광고 그룹은 N:1 관계*/
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adgroupId",insertable = false, updatable = false)
     private Adgroup adgroup;
     private Long adgroupId;

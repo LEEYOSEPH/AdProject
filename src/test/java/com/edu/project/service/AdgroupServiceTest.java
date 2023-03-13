@@ -2,7 +2,9 @@ package com.edu.project.service;
 
 import com.edu.project.entity.Adgroup;
 import com.edu.project.repository.AdgroupRepository;
+import com.edu.project.repository.AdgroupRepositoryImpl;
 import com.edu.project.request.AdgroupRequestDto;
+import com.edu.project.response.AdgroupListResponseDto;
 import com.edu.project.response.AdgroupResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,6 @@ class AdgroupServiceTest {
     private AdgroupService adgroupService;
     @Autowired
     private AdgroupRepository adgroupRepository;
-
 
     @Test
     @DisplayName("광고그룹 등록")
@@ -42,6 +43,13 @@ class AdgroupServiceTest {
         //then
         assertThat(adGroupList).isNotEmpty();
     }
-    
 
+    @Test
+    @DisplayName("광고관리 -광고그룹 조회")
+    void test3() {
+        //given & when
+        String advId = "adv";
+        List<AdgroupListResponseDto> adgroupListResponseDto = adgroupService.adMngAdgroupList(advId);
+        //then
+        System.out.println(adgroupListResponseDto.toString());    }
 }

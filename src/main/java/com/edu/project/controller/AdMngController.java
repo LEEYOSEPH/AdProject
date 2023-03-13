@@ -3,15 +3,20 @@ package com.edu.project.controller;
 import com.edu.project.request.AdIngActYnRequestDto;
 import com.edu.project.request.AdvRequestDto;
 import com.edu.project.request.DayLimitBudgetRequestDto;
+import com.edu.project.response.AdgroupListResponseDto;
 import com.edu.project.response.AdvResponseDto;
+import com.edu.project.service.AdgroupService;
 import com.edu.project.service.AdvService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class AdMngController {
     private final AdvService advService;
+    private final AdgroupService adgroupService;
 
     /*
      *  광고주 정보조회 API
@@ -48,5 +53,16 @@ public class AdMngController {
     public AdvResponseDto putDayLimitBudget(@RequestBody DayLimitBudgetRequestDto dayLimitBudgetRequestDto) {
         System.out.println(dayLimitBudgetRequestDto);
         return advService.putDayLimitBudget(dayLimitBudgetRequestDto);
+    }
+    
+    /*
+     *  광고그룹 리스트 조회 API
+     *  RequestParam : advId
+     *  return :  List<AdgroupListResponseDto>
+     * */
+    @GetMapping("/api/getAdMngAdgroupList")
+    @ResponseBody
+    public List<AdgroupListResponseDto> getAdMngAdgroupList(@RequestParam(value = "advId") String advId) {
+        return adgroupService.getAdMngAdgroupList(advId);
     }
 }

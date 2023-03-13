@@ -5,11 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,8 +19,11 @@ public class Adgroup {
     private Long adgroupId;
     private String adgroupName;
     private Date regTime;
-    private Integer adgroupActYn;
-    private Integer adgroupUseConfigYn;
+    private Integer adgroupActYn;  // 광고그룹 활성 여부
+    private Integer adgroupUseConfigYn; // 광고그룹 사용 설정 여부
+
+    @OneToMany(mappedBy = "adgroup", cascade = CascadeType.ALL)
+    private List<AD> adList = new ArrayList<>();
 
     @Builder
     public Adgroup(String adgroupName){
