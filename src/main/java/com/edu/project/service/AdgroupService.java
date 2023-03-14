@@ -3,12 +3,14 @@ package com.edu.project.service;
 import com.edu.project.entity.Adgroup;
 import com.edu.project.repository.AdgroupRepository;
 import com.edu.project.repository.AdgroupRepositoryImpl;
+import com.edu.project.request.AdgroupActYnRequestDto;
 import com.edu.project.request.AdgroupRequestDto;
 import com.edu.project.response.AdgroupListResponseDto;
 import com.edu.project.response.AdgroupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,5 +43,15 @@ public class AdgroupService {
     * */
     public List<AdgroupListResponseDto> getAdMngAdgroupList(String advId) {
         return  adgroupImplRepository.getAdMngAdgroupList(advId);
+    }
+
+    /*
+     * 광고관리 - 광고그룹 활성상태 변경
+     * */
+    @Transactional
+    public List<AdgroupListResponseDto> putAdgroupActYn(AdgroupActYnRequestDto adgroupActYnRequestDto) {
+        Adgroup adgroup = adgroupRepository.findById(adgroupActYnRequestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("일치하는 광고그룹이 없습니다."));
+        adgroup.adgroupActYnUpdate(adgroupActYnRequestDto.getAdgroupActYn());
+       return getAdMngAdgroupList(adgroupActYnRequestDto.getAdvId());
     }
 }

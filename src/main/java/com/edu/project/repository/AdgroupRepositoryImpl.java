@@ -27,14 +27,13 @@ public class AdgroupRepositoryImpl implements AdgroupRepositoryCustom{
                 adgroup.adgroupId,
                 adgroup.adgroupName,
                 adgroup.adgroupActYn,
-                adgroup.adgroupUseConfigYn
+                aD.adUseConfigYn.count().intValue(),
+                aD.adUseConfigYn.count().intValue()
                 ))
                 .from(adgroup)
                 .join(adgroup.adList, aD)
-                .where(aD.advId.eq(advId),
-                        adgroup.adgroupActYn.eq(1),
-                        adgroup.adgroupUseConfigYn.eq(1)
-                )
+                .where(aD.advId.eq(advId))
+                .groupBy(adgroup.adgroupId)
                 .fetch();
     }
 }

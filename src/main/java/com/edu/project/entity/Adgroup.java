@@ -34,10 +34,16 @@ public class Adgroup {
 
     }
 
+    /* 광고그룹 생성*/
     public Adgroup addAdgroup(AdgroupRequestDto requestDto){
         Adgroup adgroup = Adgroup.builder()
                 .adgroupName(requestDto.getAdgroupName())
                 .build();
         return adgroup;
+    }
+
+    /*광고그룹 활성여부 변경*/
+    public void adgroupActYnUpdate(Integer adgroupActYn) {
+        this.adgroupActYn = adgroupActYn;
     }
 }

@@ -1,6 +1,7 @@
 package com.edu.project.controller;
 
 import com.edu.project.request.AdIngActYnRequestDto;
+import com.edu.project.request.AdgroupActYnRequestDto;
 import com.edu.project.request.AdvRequestDto;
 import com.edu.project.request.DayLimitBudgetRequestDto;
 import com.edu.project.response.AdgroupListResponseDto;
@@ -51,7 +52,6 @@ public class AdMngController {
     @PutMapping("/api/putDayLimitBudget")
     @ResponseBody
     public AdvResponseDto putDayLimitBudget(@RequestBody DayLimitBudgetRequestDto dayLimitBudgetRequestDto) {
-        System.out.println(dayLimitBudgetRequestDto);
         return advService.putDayLimitBudget(dayLimitBudgetRequestDto);
     }
     
@@ -64,5 +64,16 @@ public class AdMngController {
     @ResponseBody
     public List<AdgroupListResponseDto> getAdMngAdgroupList(@RequestParam(value = "advId") String advId) {
         return adgroupService.getAdMngAdgroupList(advId);
+    }
+
+    /*
+     *  광고그룹 활성여부 변경 API
+     *  RequestBody : AdgroupActYnRequestDto
+     *  return :  List<AdgroupListResponseDto>
+     * */
+    @PutMapping("/api/putAdgroupActYn")
+    @ResponseBody
+    public List<AdgroupListResponseDto> putAdgroupActYn(@RequestBody AdgroupActYnRequestDto adgroupActYnRequestDto) {
+        return adgroupService.putAdgroupActYn(adgroupActYnRequestDto);
     }
 }
