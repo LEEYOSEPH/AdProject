@@ -8,10 +8,6 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class AdgroupRequestDto {
+public class AddAdgroupRequestDto {
     private String adgroupName;
-    @Builder
-    public AdgroupRequestDto(String adgroupName) {
-        this.adgroupName = adgroupName;
-    }
 }

@@ -42,7 +42,6 @@ public class ApiController {
     @PostMapping("/api/adgroup")
     @ResponseBody
     public AdgroupResponseDto addAdgroup (@RequestBody AdgroupRequestDto requestDto) {
-        System.out.println(requestDto);
         return adgroupService.addAdgroup(requestDto);
     }
 

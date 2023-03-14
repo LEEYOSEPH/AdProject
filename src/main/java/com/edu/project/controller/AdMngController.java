@@ -1,10 +1,8 @@
 package com.edu.project.controller;
 
-import com.edu.project.request.AdIngActYnRequestDto;
-import com.edu.project.request.AdgroupActYnRequestDto;
-import com.edu.project.request.AdvRequestDto;
-import com.edu.project.request.DayLimitBudgetRequestDto;
+import com.edu.project.request.*;
 import com.edu.project.response.AdgroupListResponseDto;
+import com.edu.project.response.AdgroupResponseDto;
 import com.edu.project.response.AdvResponseDto;
 import com.edu.project.service.AdgroupService;
 import com.edu.project.service.AdvService;
@@ -62,8 +60,8 @@ public class AdMngController {
      * */
     @GetMapping("/api/getAdMngAdgroupList")
     @ResponseBody
-    public List<AdgroupListResponseDto> getAdMngAdgroupList(@RequestParam(value = "advId") String advId) {
-        return adgroupService.getAdMngAdgroupList(advId);
+    public List<AdgroupListResponseDto> getAdMngAdgroupList() {
+        return adgroupService.getAdMngAdgroupList();
     }
 
     /*
@@ -71,9 +69,53 @@ public class AdMngController {
      *  RequestBody : AdgroupActYnRequestDto
      *  return :  List<AdgroupListResponseDto>
      * */
-    @PutMapping("/api/putAdgroupActYn")
+    @PutMapping("/api/putAdgroupListActYn")
     @ResponseBody
-    public List<AdgroupListResponseDto> putAdgroupActYn(@RequestBody AdgroupActYnRequestDto adgroupActYnRequestDto) {
-        return adgroupService.putAdgroupActYn(adgroupActYnRequestDto);
+    public List<AdgroupListResponseDto> putAdgroupListActYn(@RequestBody AdgroupActYnListRequestDto requestDto) {
+       return adgroupService.putAdgroupListActYn(requestDto);
+    }
+
+    /*
+     *  광고그룹  사용여부 변경 API
+     *  RequestBody : AdgroupUseConfigYnRequestDto
+     *  return :  List<AdgroupListResponseDto>
+     * */
+    @PutMapping("/api/putAdgroupUseConfigYn")
+    @ResponseBody
+    public List<AdgroupListResponseDto> putAdgroupUseConfigYn(@RequestBody AdgroupUseConfigYnRequestDto requestDto) {
+        return adgroupService.putAdgroupUseConfigYn(requestDto);
+    }
+    /*
+     *  광고그룹  사용여부 변경 API
+     *  RequestBody : AdgroupUseConfigYnRequestDto
+     *  return :  List<AdgroupListResponseDto>
+     * */
+    @PutMapping("/api/putAdgroupUseConfigListYn")
+    @ResponseBody
+    public List<AdgroupListResponseDto> putAdgroupUseConfigListYn(@RequestBody AdgroupUseConfigYnListRequestDto requestDto) {
+        return adgroupService.putAdgroupUseConfigListYn(requestDto);
+    }
+
+    /*
+     *  광고그룹명 검색 조회 API
+     *  RequestBody : AdgroupActYnRequestDto
+     *  return :  List<AdgroupListResponseDto>
+     * */
+    @PostMapping("/api/searchAdgroupList")
+    @ResponseBody
+    public List<AdgroupListResponseDto> searchAdgroupList(@RequestBody AdgroupNameRequestDto requestDto) {
+        System.out.println(requestDto.getAdgroupName());
+        return adgroupService.searchAdgroupList(requestDto);
+    }
+
+    /*
+     *  광고그룹 등록 API
+     *  requestBody : AdgroupRequestDto
+     *  return : AdgroupResponseDto
+     * */
+    @PostMapping("/api/addAdgroup")
+    @ResponseBody
+    public List<AdgroupListResponseDto>  adMngAddAdgroup (@RequestBody AddAdgroupRequestDto requestDto) {
+        return adgroupService.adMngAddAdgroup(requestDto);
     }
 }

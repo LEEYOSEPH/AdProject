@@ -40,6 +40,7 @@ public class AdService {
 
         // 광고 등록
         Long adId = adRepository.save(new AD().addAd(requestDto)).getAdId();
+
         // 키워드 등록
         addKwd(adId,requestDto);
     }
@@ -50,7 +51,7 @@ public class AdService {
     public void addKwd(Long adId, AdRequestDto requestDto) {
         
         // 클라이언트에서 넘어온 키워드 명이 있는지 확인하고 있으면, 디비에서 조회 후 신규 등록 하거나, 기존 키워드 아이디를 넘겨주기
-        List<KwdRequestDto> list = requestDto.getKWds().stream().map(KwdRequestDto::new).collect(Collectors.toList());
+    List<KwdRequestDto> list = requestDto.getKWds().stream().map(KwdRequestDto::new).collect(Collectors.toList());
         if(!list.isEmpty()) {
             list.forEach(kwdRequestDto ->  {
                 // 키워드명 테이블에 존재 하는지 개별조회

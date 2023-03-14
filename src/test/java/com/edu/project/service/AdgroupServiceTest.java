@@ -3,6 +3,7 @@ package com.edu.project.service;
 import com.edu.project.entity.Adgroup;
 import com.edu.project.repository.AdgroupRepository;
 import com.edu.project.repository.AdgroupRepositoryImpl;
+import com.edu.project.request.AdgroupActYnListRequestDto;
 import com.edu.project.request.AdgroupActYnRequestDto;
 import com.edu.project.request.AdgroupRequestDto;
 import com.edu.project.response.AdgroupListResponseDto;
@@ -52,25 +53,10 @@ class AdgroupServiceTest {
     void test3() {
         //given & when
         String advId = "adv";
-        List<AdgroupListResponseDto> adgroupListResponseDto = adgroupService.getAdMngAdgroupList(advId);
+        List<AdgroupListResponseDto> adgroupListResponseDto = adgroupService.getAdMngAdgroupList();
         //then
         System.out.println(adgroupListResponseDto.toString());    }   
     
     
-    @Test
-    @DisplayName("광고관리 -광고그룹 활성여부 변경")
-    void test4() {
-        //given
-        AdgroupActYnRequestDto adgroupActYnRequestDto = new AdgroupActYnRequestDto();
-        adgroupActYnRequestDto.setAdvId("adv");
-        adgroupActYnRequestDto.setAdgroupId(1L);
-        adgroupActYnRequestDto.setAdgroupActYn(1);
 
-        //when
-        adgroupService.putAdgroupActYn(adgroupActYnRequestDto);
-
-        //then
-        Adgroup adgroup = adgroupRepository.findById(adgroupActYnRequestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("test "));
-        assertThat(adgroup.getAdgroupActYn()).isEqualTo(1);
-    }
 }

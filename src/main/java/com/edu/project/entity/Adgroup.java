@@ -1,5 +1,6 @@
 package com.edu.project.entity;
 
+import com.edu.project.request.AddAdgroupRequestDto;
 import com.edu.project.request.AdgroupRequestDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,8 +43,22 @@ public class Adgroup {
         return adgroup;
     }
 
+    /* 광고그룹 생성*/
+    public Adgroup adMngAddAdgroup(String adgroupName){
+        Adgroup adgroup = Adgroup.builder()
+                .adgroupName(adgroupName)
+                .build();
+        return adgroup;
+    }
+
     /*광고그룹 활성여부 변경*/
     public void adgroupActYnUpdate(Integer adgroupActYn) {
         this.adgroupActYn = adgroupActYn;
     }
+
+    /*광고그룹 사용여부 변경*/
+    public void adgroupUseConfigYnUpdate(Integer adgroupUseConfigYn) {
+        this.adgroupUseConfigYn = adgroupUseConfigYn;
+    }
+
 }

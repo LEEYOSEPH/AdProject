@@ -3,16 +3,18 @@ package com.edu.project.service;
 import com.edu.project.entity.Adgroup;
 import com.edu.project.repository.AdgroupRepository;
 import com.edu.project.repository.AdgroupRepositoryImpl;
-import com.edu.project.request.AdgroupActYnRequestDto;
-import com.edu.project.request.AdgroupRequestDto;
+import com.edu.project.request.*;
 import com.edu.project.response.AdgroupListResponseDto;
 import com.edu.project.response.AdgroupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.util.StringUtils.*;
 
 @Service
 @RequiredArgsConstructor
@@ -41,17 +43,59 @@ public class AdgroupService {
     /*
     * 광고관리 - 그룹리스트 조회
     * */
-    public List<AdgroupListResponseDto> getAdMngAdgroupList(String advId) {
-        return  adgroupImplRepository.getAdMngAdgroupList(advId);
+    public List<AdgroupListResponseDto> getAdMngAdgroupList() {
+        return  adgroupImplRepository.getAdMngAdgroupList();
     }
 
     /*
-     * 광고관리 - 광고그룹 활성상태 변경
+     * 광고관리 - 광고그룹 삭제
      * */
     @Transactional
-    public List<AdgroupListResponseDto> putAdgroupActYn(AdgroupActYnRequestDto adgroupActYnRequestDto) {
-        Adgroup adgroup = adgroupRepository.findById(adgroupActYnRequestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("일치하는 광고그룹이 없습니다."));
-        adgroup.adgroupActYnUpdate(adgroupActYnRequestDto.getAdgroupActYn());
-       return getAdMngAdgroupList(adgroupActYnRequestDto.getAdvId());
+    public List<AdgroupListResponseDto> putAdgroupListActYn(AdgroupActYnListRequestDto requestDto){
+        List<AdgroupActYnRequestDto> adgroupActYnRequestDtoList = requestDto.getAdgroupList().stream().map(AdgroupActYnRequestDto::new).collect(Collectors.toList());
+        adgroupActYnRequestDtoList.forEach(adgroupActYnRequestDto -> {
+            Adgroup adgroup = adgroupRepository.findById(adgroupActYnRequestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("일치하는 광고그룹이 없습니다."));
+            adgroup.adgroupActYnUpdate(adgroupActYnRequestDto.getAdgroupActYn());
+        });
+        return getAdMngAdgroupList();
+    }
+
+    /*
+     * 광고관리 - 광고그룹리스트 사용여부 변경 - 단건
+     * */
+   @Transactional
+    public  List<AdgroupListResponseDto> putAdgroupUseConfigYn(AdgroupUseConfigYnRequestDto requestDto) {
+        Adgroup adgroup = adgroupRepository.findById(requestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("일치하는 광고그룹이 없습니다."));
+        adgroup.adgroupUseConfigYnUpdate(requestDto.getAdgroupUseConfigYn());
+        return getAdMngAdgroupList();
+    }
+
+    /*
+     * 광고관리 - 광고그룹리스트 사용여부 변경
+     * */
+    @Transactional
+    public List<AdgroupListResponseDto> putAdgroupUseConfigListYn(AdgroupUseConfigYnListRequestDto requestDto) {
+        List<AdgroupUseConfigYnRequestDto> adgroupUseConfigYnRequestDto = requestDto.getAdgroupList().stream().map(AdgroupUseConfigYnRequestDto::new).collect(Collectors.toList());
+        adgroupUseConfigYnRequestDto.forEach(useConfigYnRequestDto ->{
+            Adgroup adgroup = adgroupRepository.findById(useConfigYnRequestDto.getAdgroupId()).orElseThrow(() -> new IllegalArgumentException("일지하틑 회원이 없습니다."));
+            adgroup.adgroupUseConfigYnUpdate(useConfigYnRequestDto.getAdgroupUseConfigYn());
+        } );
+        return getAdMngAdgroupList();
+    }
+
+    /*
+     * 광고관리 - 광고그룹명 검색
+     * */
+    public List<AdgroupListResponseDto> searchAdgroupList(AdgroupNameRequestDto requestDto) {
+        return adgroupImplRepository.searchAdgroupList(requestDto);
+    }
+
+    /*
+     * 광고관리 -그룹 추가
+     *
+     * */
+    public List<AdgroupListResponseDto> adMngAddAdgroup(AddAdgroupRequestDto requestDto){
+        adgroupRepository.save(new Adgroup().adMngAddAdgroup(requestDto.getAdgroupName()));
+        return getAdMngAdgroupList();
     }
 }
